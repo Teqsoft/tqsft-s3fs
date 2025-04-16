@@ -1,0 +1,29 @@
+{
+  "name": "tqsft-s3fs",
+  "version": "0.1.0",
+  "bin": {
+    "inf": "bin/tqsft-s3fs.js"
+  },
+  "description": "S3FS App with configuration to use with SAMBA in a Docker Container",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "podman-build": "DOCKER_BUILDKIT=1 podman build --arch=arm64 --tag tqsft-s3fs .",
+    "podman-run": "podman run -d -p 445:445 --device /dev/fuse --cap-add SYS_ADMIN --security-opt \"apparmor=unconfined\" --env-file ./src/test.env localhost/tqsft-s3fs"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.7.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "aws-cdk": "2.1007.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.186.0",
+    "constructs": "^10.0.0"
+  }
+}
