@@ -232,6 +232,11 @@ if [ -z "${AWS_S3_BUCKET}" ]; then
 fi
 
 # Create or use authorisation file
+if [ -z "${AWS_S3_AUTHFILE}" ]; then
+    AWS_S3_AUTHFILE=${AWS_S3_ROOTDIR%/}/passwd-s3fs
+    echo "${AWS_S3_ACCESS_KEY_ID}:${AWS_S3_SECRET_ACCESS_KEY}" > "${AWS_S3_AUTHFILE}"
+    chmod 600 "${AWS_S3_AUTHFILE}"
+fi
 
 # Forget about the secret once done (this will have proper effects when the
 # PASSWORD_FILE-version of the setting is used)
